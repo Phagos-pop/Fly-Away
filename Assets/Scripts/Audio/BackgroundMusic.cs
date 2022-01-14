@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Music : MonoBehaviour
+public class BackgroundMusic : MonoBehaviour
 {
     [Header("Tags")]
     [SerializeField] private string backgroundMusicTag;
