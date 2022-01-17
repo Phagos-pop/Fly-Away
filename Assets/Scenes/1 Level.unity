@@ -3132,12 +3132,11 @@ MonoBehaviour:
   goalToWin: 20
   firstHeard: {fileID: 1762054116}
   secondHeard: {fileID: 988786433}
-  thirdHeard: {fileID: 988786433}
+  thirdHeard: {fileID: 2031506655}
   gameCanvas: {fileID: 2060138613}
   defeatCanvas: {fileID: 203106361}
   pauseCanvas: {fileID: 974985671}
   winCanvas: {fileID: 254764173}
-  poofSoundTag: POOF_SOUND
 --- !u!1 &1762054116
 GameObject:
   m_ObjectHideFlags: 0

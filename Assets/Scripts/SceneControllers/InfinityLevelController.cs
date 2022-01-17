@@ -7,8 +7,6 @@ public class InfinityLevelController : MonoBehaviour
     private PinkBirdsSpawn pinkBirdsSpawn;
     private GreenBirdsSpawn greenBirdsSpawn;
 
-    public float greenBirdIncreaseSpeed;
-
 
     void Start()
     {
@@ -21,9 +19,12 @@ public class InfinityLevelController : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("increase");
-            pinkBirdsSpawn.Bird.PowerOfWingsFlap += 2;
-            yield return new WaitForSeconds(2f);
+            pinkBirdsSpawn.Bird.PowerOfWingsFlap += 0.1f;
+            pinkBirdsSpawn.Bird.Speed += 0.1f;
+            pinkBirdsSpawn.Bird.TimeBeforeWingsFlap -= 0.001f;
+            greenBirdsSpawn.Bird.Speed += 0.1f;
+            greenBirdsSpawn.Bird.directionY += 0.01f;
+            yield return new WaitForSeconds(5f);
         }
     }
 }

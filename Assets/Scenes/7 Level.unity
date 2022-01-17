@@ -3867,7 +3867,7 @@ MonoBehaviour:
   goalToWin: 35
   firstHeard: {fileID: 946114843}
   secondHeard: {fileID: 506212115}
-  thirdHeard: {fileID: 506212115}
+  thirdHeard: {fileID: 593418063}
   gameCanvas: {fileID: 342195560}
   defeatCanvas: {fileID: 603574592}
   pauseCanvas: {fileID: 234819777}

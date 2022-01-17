@@ -23,7 +23,7 @@ public class GreenBird : MonoBehaviour, IEnemy
         Messenger.AddListener(GameEvent.WIN, OnWin);
         spriterenderer = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
-
+        audio.Play();
         StartCoroutine(ChangeSprite());
         do
         {

@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    [Header("Tags")]
-    [SerializeField] private string backgroundMusicTag;
-    
-    void Awake()
+    AudioSource source;
+
+    void Start()
     {
-        GameObject obj = GameObject.FindWithTag(this.backgroundMusicTag);
-        if (obj != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            this.gameObject.tag = this.backgroundMusicTag;
-            DontDestroyOnLoad(this.gameObject);
-        }
+        source = GetComponent<AudioSource>();
+        Messenger.AddListener(GameEvent.WIN, WinSound);
+        Messenger.AddListener(GameEvent.DEFEAT, WinSound);
+    }
+
+    void WinSound()
+    {
+        StartCoroutine(SoundReduction());
+    }
+
+    IEnumerator SoundReduction()
+    {
+        source.volume = 0.40f;
+        yield return new WaitForSeconds(2f);
+        source.volume = 1f;
+    }
+
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener(GameEvent.WIN, WinSound);
+        Messenger.RemoveListener(GameEvent.DEFEAT, WinSound);
     }
 }

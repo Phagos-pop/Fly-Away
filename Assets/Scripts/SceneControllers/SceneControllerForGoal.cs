@@ -8,6 +8,7 @@ public class SceneControllerForGoal : MonoBehaviour
 {
     private int _score;
     private bool winFlag;
+    private bool defeatFlag;
     public int goalToWin;
     public GameObject firstHeard;
     public GameObject secondHeard;
@@ -61,18 +62,20 @@ public class SceneControllerForGoal : MonoBehaviour
             Messenger.Broadcast(GameEvent.WIN);
             winFlag = true;
         }
-        if (!thirdHeard)
+        if (!thirdHeard && !defeatFlag)
         {
             GameOver();
         }
     }
     public void LoadNewLevel()
     {
+        Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadThisScene()
     {
+        Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -95,22 +98,28 @@ public class SceneControllerForGoal : MonoBehaviour
 
     public void GameOver()
     {
+        defeatFlag = true;
         defeatCanvas.SetActive(true);
+        Messenger.Broadcast(GameEvent.STOP_SPAWN);
+        Messenger.Broadcast(GameEvent.DEFEAT);
     }
     public void PauseOn()
     {
+        Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         pauseCanvas.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void PauseOff()
     {
+        Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void LoadMenu()
     {
+        Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
