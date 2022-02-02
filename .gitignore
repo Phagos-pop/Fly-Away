@@ -75,12 +75,12 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # adds for firebase
-Assets\Editor_Default_Resources/*
-Assets\ExternalDependencyManager/*
-Assets\Firebase/*
-Assets\Parse/*
-Assets\Plugins/*
-Assets\StreamingAssets/*
+Assets\Editor_Default_Resources/
+Assets\ExternalDependencyManager/
+Assets\Firebase/
+Assets\Parse/
+Assets\Plugins/
+Assets\StreamingAssets/
 
 google-services.json
 
