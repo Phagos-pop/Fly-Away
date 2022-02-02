@@ -74,4 +74,29 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# adds
+\Assets\Editor_Default_Resources/*
+\Assets\ExternalDependencyManager/*
+\Assets\Firebase/*
+\Assets\Parse/*
+\Assets\Plugins/*
+\Assets\StreamingAssets/*
+google-services.json
+git rm -r --cached "Assets/Editor_Default_Resources/"
+git rm -r --cached "Assets/ExternalDependencyManager/"
+git rm -r --cached "Assets/Firebase/"
+git rm -r --cached "Assets/Parse/"
+git rm -r --cached "Assets/Plugins/"
+git rm -r --cached "Assets/StreamingAssets/"
+
+
+
+
+
+
+
+
+
+
+
 # End of https://www.toptal.com/developers/gitignore/api/unity
