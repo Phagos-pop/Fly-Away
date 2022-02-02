@@ -1,33 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundMusic : MonoBehaviour
+sealed class BackgroundMusic : MonoBehaviour
 {
-    AudioSource source;
+    private AudioSource audioSource;
+    [SerializeField] private float volumeReduction;
+    [SerializeField] private float volumeReductionTime;
 
-    void Start()
+    private void Start()
     {
-        source = GetComponent<AudioSource>();
-        Messenger.AddListener(GameEvent.WIN, WinSound);
-        Messenger.AddListener(GameEvent.DEFEAT, WinSound);
+        audioSource = GetComponent<AudioSource>();
+        Messenger.AddListener(GameEvent.WIN, SoundReduction);
+        Messenger.AddListener(GameEvent.DEFEAT, SoundReduction);
     }
 
-    void WinSound()
+    private void SoundReduction()
     {
-        StartCoroutine(SoundReduction());
+        StartCoroutine(SoundReductionCoroutine());
     }
 
-    IEnumerator SoundReduction()
+    private IEnumerator SoundReductionCoroutine()
     {
-        source.volume = 0.40f;
-        yield return new WaitForSeconds(2f);
-        source.volume = 1f;
+        audioSource.volume = volumeReduction;
+        yield return new WaitForSeconds(volumeReductionTime);
+        audioSource.volume = 1f;
     }
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.WIN, WinSound);
-        Messenger.RemoveListener(GameEvent.DEFEAT, WinSound);
+        Messenger.RemoveListener(GameEvent.WIN, SoundReduction);
+        Messenger.RemoveListener(GameEvent.DEFEAT, SoundReduction);
     }
 }

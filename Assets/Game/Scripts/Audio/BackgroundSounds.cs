@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundSound : MonoBehaviour
+sealed class BackgroundSounds : MonoBehaviour
 {
     [Header("Tags")]
     [SerializeField] private string backgroundMusicTag;
-    
-    void Awake()
+
+    private void Awake()
     {
         GameObject obj = GameObject.FindWithTag(this.backgroundMusicTag);
         if (obj != null)

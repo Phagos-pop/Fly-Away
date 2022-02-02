@@ -64,8 +64,24 @@ public class SwipeLevels : MonoBehaviour , IBeginDragHandler , IDragHandler
         }
         for (int i = 0; i < levels.Length; i++)
         {
-            levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
+            //levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
+
         }
         currentPage += direction;
     }
+
+    //IEnumerator MovePanels(int direction)
+    //{
+    //    if ((currentPage == 1 && direction == -1) || (currentPage == numOfPages && direction == 1))
+    //    {
+    //        yield return break;
+    //    }
+    //    for (int i = 0; i < levels.Length; i++)
+    //    {
+    //        //levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
+    //        levels[i].transform.Translate
+    //    }
+    //    currentPage += direction;
+    //}
+
 }

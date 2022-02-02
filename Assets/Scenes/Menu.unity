@@ -5939,7 +5939,7 @@ GameObject:
   - component: {fileID: 534687409}
   - component: {fileID: 534687410}
   m_Layer: 0
-  m_Name: Background Sound
+  m_Name: Background Sounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6345,7 +6345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568204397}
   - component: {fileID: 568204399}
-  - component: {fileID: 568204398}
+  - component: {fileID: 568204400}
   m_Layer: 0
   m_Name: Win
   m_TagString: Untagged
@@ -6367,18 +6367,6 @@ Transform:
   m_Father: {fileID: 534687409}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &568204398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568204396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82fbffddb4bf244daa344eb2b8667be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &568204399
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6475,6 +6463,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &568204400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568204396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8383a83d2369edc44bde1f9b7eaeb4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventType: WIN
 --- !u!1 &580614822
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,7 +9343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803502111}
   - component: {fileID: 803502112}
-  - component: {fileID: 803502113}
+  - component: {fileID: 803502114}
   m_Layer: 0
   m_Name: Wood Button Push
   m_TagString: Untagged
@@ -9460,7 +9461,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &803502113
+--- !u!114 &803502114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9469,9 +9470,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 803502110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d6c0ca2d101bbc4382c3eae2dcded25, type: 3}
+  m_Script: {fileID: 11500000, guid: 8383a83d2369edc44bde1f9b7eaeb4c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EventType: WOOD_BUTTON_PUSH
 --- !u!1 &807040569
 GameObject:
   m_ObjectHideFlags: 0
@@ -9553,7 +9555,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 807040572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1559713615}
+        m_TargetAssemblyTypeName: Firebase.Sample.Analytics.UIHandler, Assembly-CSharp
+        m_MethodName: AnalyticsProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &807040572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17670,6 +17684,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554730044}
   m_CullTransparentMesh: 1
+--- !u!1 &1559713612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1559713614}
+  - component: {fileID: 1559713613}
+  - component: {fileID: 1559713615}
+  m_Layer: 0
+  m_Name: Analiticst
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1559713613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559713612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df43657c6229ec74da2749403f8020ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1559713614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559713612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.8704205, y: 3.1404424, z: -437.41446}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559713615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559713612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa1485d364a8384aaf497b234ede867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fb_GUISkin: {fileID: 0}
 --- !u!1 &1570159004
 GameObject:
   m_ObjectHideFlags: 0
@@ -17680,7 +17751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570159005}
   - component: {fileID: 1570159007}
-  - component: {fileID: 1570159006}
+  - component: {fileID: 1570159008}
   m_Layer: 0
   m_Name: Defeat
   m_TagString: Untagged
@@ -17702,18 +17773,6 @@ Transform:
   m_Father: {fileID: 534687409}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1570159006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570159004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8694492f2506c34793e9713b6b4403f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1570159007
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17810,6 +17869,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1570159008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570159004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8383a83d2369edc44bde1f9b7eaeb4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventType: DEFEAT
 --- !u!1 &1593903718
 GameObject:
   m_ObjectHideFlags: 0
@@ -18627,6 +18699,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf119f2742cd5f46aa07e6fd26587c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeReduction: 0.4
+  volumeReductionTime: 2
 --- !u!1 &1684027383
 GameObject:
   m_ObjectHideFlags: 0
@@ -22850,7 +22924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100383104}
   - component: {fileID: 2100383103}
-  - component: {fileID: 2100383102}
+  - component: {fileID: 2100383105}
   m_Layer: 0
   m_Name: Poof
   m_TagString: Untagged
@@ -22858,18 +22932,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2100383102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100383101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb47d3114a034b4dbf8c375ed5cfd61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &2100383103
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22882,7 +22944,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6249370590220879876, guid: 4841e4d0fb486d4428093b6bb6d9c153, type: 2}
   m_audioClip: {fileID: 8300000, guid: c6aa0d43820ddbb4aa2ed9eed9d97644, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.737
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -22980,6 +23042,19 @@ Transform:
   m_Father: {fileID: 534687409}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100383105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100383101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8383a83d2369edc44bde1f9b7eaeb4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventType: ENEMY_HIT
 --- !u!1 &2133984643
 GameObject:
   m_ObjectHideFlags: 0
