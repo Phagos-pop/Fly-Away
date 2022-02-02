@@ -100,3 +100,4 @@ git rm -r --cached "Assets/StreamingAssets/"
 
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
+Assets/Editor Default Resources.meta
