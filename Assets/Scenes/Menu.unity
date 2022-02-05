@@ -9556,7 +9556,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1559713615}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Firebase.Sample.Analytics.UIHandler, Assembly-CSharp
         m_MethodName: AnalyticsProgress
         m_Mode: 1
@@ -17694,7 +17694,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1559713614}
   - component: {fileID: 1559713613}
-  - component: {fileID: 1559713615}
   m_Layer: 0
   m_Name: Analiticst
   m_TagString: Untagged
@@ -17711,7 +17710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559713612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df43657c6229ec74da2749403f8020ad, type: 3}
+  m_Script: {fileID: 11500000, guid: c5019f3f3e0b8db40bd1eda920c43a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1559713614
@@ -17728,19 +17727,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1559713615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559713612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa1485d364a8384aaf497b234ede867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fb_GUISkin: {fileID: 0}
 --- !u!1 &1570159004
 GameObject:
   m_ObjectHideFlags: 0

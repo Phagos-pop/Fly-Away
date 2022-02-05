@@ -64,14 +64,14 @@ public class SwipeLevels : MonoBehaviour , IBeginDragHandler , IDragHandler
         }
         for (int i = 0; i < levels.Length; i++)
         {
-            //levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
-
+            levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
         }
         currentPage += direction;
     }
 
-    //IEnumerator MovePanels(int direction)
+    //IEnumerator MovePanel(int direction)
     //{
+    //    yield return new WaitForSeconds(0.1f);
     //    if ((currentPage == 1 && direction == -1) || (currentPage == numOfPages && direction == 1))
     //    {
     //        yield return break;
@@ -79,9 +79,11 @@ public class SwipeLevels : MonoBehaviour , IBeginDragHandler , IDragHandler
     //    for (int i = 0; i < levels.Length; i++)
     //    {
     //        //levels[i].transform.SetPositionAndRotation((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)), Quaternion.identity);
-    //        levels[i].transform.Translate
+    //        levels[i].transform.Translate((levels[i].transform.position + new Vector3(23.1481f * -direction, 0f, 0f)));
     //    }
     //    currentPage += direction;
+    //    yield return new WaitForSeconds(0.1f);
+        
     //}
 
 }
