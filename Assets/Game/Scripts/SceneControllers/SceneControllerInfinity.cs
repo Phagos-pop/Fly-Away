@@ -45,6 +45,7 @@ public class SceneControllerInfinity : MonoBehaviour
                 continue;
             }
         }
+        MaxSdk.ShowBanner("06df718d586aee81");
     }
     private void OnEnemyHit()
     {
@@ -73,12 +74,18 @@ public class SceneControllerInfinity : MonoBehaviour
     }
     public void LoadNewLevel()
     {
+        MaxSdk.HideBanner("06df718d586aee81");
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadThisScene()
     {
+        MaxSdk.HideBanner("06df718d586aee81");
+        if (MaxSdk.IsRewardedAdReady("c6348a13bd76eeff"))
+        {
+            MaxSdk.ShowRewardedAd("c6348a13bd76eeff");
+        }
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -102,6 +109,10 @@ public class SceneControllerInfinity : MonoBehaviour
 
     public void GameOver()
     {
+        if (MaxSdk.IsInterstitialReady("01b0b364bffe0960"))
+        {
+            MaxSdk.ShowInterstitial("01b0b364bffe0960");
+        }
         defeatFlag = true;
         defeatCanvas.SetActive(true);
         Messenger.Broadcast(GameEvent.STOP_SPAWN);
@@ -123,6 +134,7 @@ public class SceneControllerInfinity : MonoBehaviour
 
     public void LoadMenu()
     {
+        MaxSdk.HideBanner("06df718d586aee81");
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;

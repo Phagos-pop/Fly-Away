@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BACKGROUND_MUSIC
+  - ANALYTICS
   layers:
   - Default
   - TransparentFX
