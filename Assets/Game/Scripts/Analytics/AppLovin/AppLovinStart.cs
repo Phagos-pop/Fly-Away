@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class AppLovinStart : MonoBehaviour
 {
-    string adUnitId = "01b0b364bffe0960";
-    int retryAttempt;
+    FirebaseRemoteConfigStart remoteConfig;
+
+    string interstitialAdUnitId = "01b0b364bffe0960";
+    int interstitialRetryAttempt;
 
     string bannerAdUnitId = "06df718d586aee81";
 
-    string adRewardUnitId = "c6348a13bd76eeff";
-    int retryRewardAttempt;
+    string rewardAdUnitId = "c6348a13bd76eeff";
+    int rewardRetryAttempt;
 
     void Start()
     {
+        remoteConfig = GetComponent<FirebaseRemoteConfigStart>();
+
         MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => {
             
         };
@@ -23,7 +27,14 @@ public class AppLovinStart : MonoBehaviour
         InitializeBannerAds();
         InitializeInterstitialAds();
         InitializeRewardedAds();
-    }    
+
+        Messenger.AddListener(GameEvent.SHOW_INTERSTITIAL, ShowInterstitial);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener(GameEvent.SHOW_INTERSTITIAL, ShowInterstitial);
+    }
 
     public void InitializeBannerAds()
     {
@@ -32,7 +43,7 @@ public class AppLovinStart : MonoBehaviour
         MaxSdk.CreateBanner(bannerAdUnitId, MaxSdkBase.BannerPosition.BottomCenter);
 
         // Set background or background color for banners to be fully functional
-        MaxSdk.SetBannerBackgroundColor(bannerAdUnitId, Color.white);
+        MaxSdk.SetBannerBackgroundColor(bannerAdUnitId, Color.clear);
     }
 
     public void InitializeInterstitialAds()
@@ -51,7 +62,7 @@ public class AppLovinStart : MonoBehaviour
 
     private void LoadInterstitial()
     {
-        MaxSdk.LoadInterstitial(adUnitId);
+        MaxSdk.LoadInterstitial(interstitialAdUnitId);
     }
 
     private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
@@ -59,7 +70,7 @@ public class AppLovinStart : MonoBehaviour
         // Interstitial ad is ready for you to show. MaxSdk.IsInterstitialReady(adUnitId) now returns 'true'
 
         // Reset retry attempt
-        retryAttempt = 0;
+        interstitialRetryAttempt = 0;
     }
 
     private void OnInterstitialLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
@@ -67,8 +78,8 @@ public class AppLovinStart : MonoBehaviour
         // Interstitial ad failed to load 
         // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
 
-        retryAttempt++;
-        double retryDelay = Math.Pow(2, Math.Min(6, retryAttempt));
+        interstitialRetryAttempt++;
+        double retryDelay = Math.Pow(2, Math.Min(6, interstitialRetryAttempt));
 
         Invoke("LoadInterstitial", (float)retryDelay);
     }
@@ -89,6 +100,15 @@ public class AppLovinStart : MonoBehaviour
         LoadInterstitial();
     }
 
+    private void ShowInterstitial()
+    {
+        if (MaxSdk.IsInterstitialReady(interstitialAdUnitId) && remoteConfig.IsInterTimeIntervalPassed)
+        {
+            MaxSdk.ShowInterstitial(interstitialAdUnitId);
+            remoteConfig.StartInterstitialTimer();
+        }
+    }
+
     public void InitializeRewardedAds()
     {
         // Attach callback
@@ -107,7 +127,7 @@ public class AppLovinStart : MonoBehaviour
 
     private void LoadRewardedAd()
     {
-        MaxSdk.LoadRewardedAd(adRewardUnitId);
+        MaxSdk.LoadRewardedAd(rewardAdUnitId);
     }
 
     private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
@@ -115,7 +135,7 @@ public class AppLovinStart : MonoBehaviour
         // Rewarded ad is ready for you to show. MaxSdk.IsRewardedAdReady(adUnitId) now returns 'true'.
 
         // Reset retry attempt
-        retryRewardAttempt = 0;
+        rewardRetryAttempt = 0;
     }
 
     private void OnRewardedAdLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
@@ -123,8 +143,8 @@ public class AppLovinStart : MonoBehaviour
         // Rewarded ad failed to load 
         // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds).
 
-        retryRewardAttempt++;
-        double retryDelay = Math.Pow(2, Math.Min(6, retryRewardAttempt));
+        rewardRetryAttempt++;
+        double retryDelay = Math.Pow(2, Math.Min(6, rewardRetryAttempt));
 
         Invoke("LoadRewardedAd", (float)retryDelay);
     }

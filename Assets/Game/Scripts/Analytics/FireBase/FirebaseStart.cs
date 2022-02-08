@@ -8,5 +8,6 @@ public class FirebaseStart : MonoBehaviour
         {
             Firebase.Analytics.FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
         });
+        
     }
 }

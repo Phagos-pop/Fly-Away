@@ -58,10 +58,7 @@ public class SceneControllerForGoal : MonoBehaviour
     {
         if (_score == 0 && !winFlag)
         {
-            if (MaxSdk.IsInterstitialReady("01b0b364bffe0960"))
-            {
-                MaxSdk.ShowInterstitial("01b0b364bffe0960");
-            }
+            Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
             winCanvas.SetActive(true);
             Messenger.Broadcast(GameEvent.STOP_SPAWN);
             Messenger.Broadcast(GameEvent.WIN);
@@ -108,10 +105,7 @@ public class SceneControllerForGoal : MonoBehaviour
 
     public void GameOver()
     {
-        if (MaxSdk.IsInterstitialReady("01b0b364bffe0960"))
-        {
-            MaxSdk.ShowInterstitial("01b0b364bffe0960");
-        }
+        Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
         defeatFlag = true;
         defeatCanvas.SetActive(true);
         Messenger.Broadcast(GameEvent.STOP_SPAWN);

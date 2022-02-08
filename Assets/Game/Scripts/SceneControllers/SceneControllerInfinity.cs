@@ -64,6 +64,7 @@ public class SceneControllerInfinity : MonoBehaviour
     {
         if (!defeatFlag)
         {
+            Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
             timer += Time.deltaTime;
             timeLabel.text = ($"Time {Mathf.Round(timer)}");
             if (!thirdHeard)
