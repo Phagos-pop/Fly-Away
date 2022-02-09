@@ -64,7 +64,6 @@ public class SceneControllerInfinity : MonoBehaviour
     {
         if (!defeatFlag)
         {
-            Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
             timer += Time.deltaTime;
             timeLabel.text = ($"Time {Mathf.Round(timer)}");
             if (!thirdHeard)
@@ -110,10 +109,7 @@ public class SceneControllerInfinity : MonoBehaviour
 
     public void GameOver()
     {
-        if (MaxSdk.IsInterstitialReady("01b0b364bffe0960"))
-        {
-            MaxSdk.ShowInterstitial("01b0b364bffe0960");
-        }
+        Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
         defeatFlag = true;
         defeatCanvas.SetActive(true);
         Messenger.Broadcast(GameEvent.STOP_SPAWN);
