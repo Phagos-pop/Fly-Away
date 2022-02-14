@@ -26,6 +26,7 @@ public class SceneControllerInfinity : MonoBehaviour
 
     void Start()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("level_start", "level_number", "inf_level");
         timer = 0f;
         pauseCanvas.SetActive(false);
         Messenger.AddListener(GameEvent.ENEMY_HIT, OnEnemyHit);
@@ -45,7 +46,7 @@ public class SceneControllerInfinity : MonoBehaviour
                 continue;
             }
         }
-        MaxSdk.ShowBanner("06df718d586aee81");
+        Messenger.Broadcast(GameEvent.SHOW_BANNER);
     }
     private void OnEnemyHit()
     {
@@ -74,18 +75,13 @@ public class SceneControllerInfinity : MonoBehaviour
     }
     public void LoadNewLevel()
     {
-        MaxSdk.HideBanner("06df718d586aee81");
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadThisScene()
     {
-        MaxSdk.HideBanner("06df718d586aee81");
-        if (MaxSdk.IsRewardedAdReady("c6348a13bd76eeff"))
-        {
-            MaxSdk.ShowRewardedAd("c6348a13bd76eeff");
-        }
+        Messenger.Broadcast(GameEvent.SHOW_REWARD);
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -109,6 +105,8 @@ public class SceneControllerInfinity : MonoBehaviour
 
     public void GameOver()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("level_fail", "level_number", "inf_level");
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("inf_level_timer", "timer_score", timer);
         Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
         defeatFlag = true;
         defeatCanvas.SetActive(true);
@@ -131,7 +129,7 @@ public class SceneControllerInfinity : MonoBehaviour
 
     public void LoadMenu()
     {
-        MaxSdk.HideBanner("06df718d586aee81");
+        Messenger.Broadcast(GameEvent.HIDE_BANNER);
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;

@@ -9,6 +9,7 @@ public class AppLovinStart : MonoBehaviour
     int interstitialRetryAttempt;
 
     string bannerAdUnitId = "06df718d586aee81";
+    bool isBannerShown = false;
 
     string rewardAdUnitId = "c6348a13bd76eeff";
     int rewardRetryAttempt;
@@ -28,7 +29,10 @@ public class AppLovinStart : MonoBehaviour
         InitializeInterstitialAds();
         InitializeRewardedAds();
 
+        Messenger.AddListener(GameEvent.SHOW_REWARD, ShowReward);
         Messenger.AddListener(GameEvent.SHOW_INTERSTITIAL, ShowInterstitial);
+        Messenger.AddListener(GameEvent.SHOW_BANNER, ShowBanner);
+        Messenger.AddListener(GameEvent.HIDE_BANNER, HideBanner);
     }
 
     private void OnDestroy()
@@ -46,6 +50,22 @@ public class AppLovinStart : MonoBehaviour
         MaxSdk.SetBannerBackgroundColor(bannerAdUnitId, Color.clear);
     }
 
+    private void ShowBanner()
+    {
+        if (!isBannerShown)
+        {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("banner_start");
+            MaxSdk.ShowBanner(bannerAdUnitId);
+            isBannerShown = true;
+        }
+    }
+
+    private void HideBanner()
+    {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("banner_closed");
+        MaxSdk.HideBanner(bannerAdUnitId);
+        isBannerShown = false;
+    }
     public void InitializeInterstitialAds()
     {
         // Attach callback
@@ -84,10 +104,14 @@ public class AppLovinStart : MonoBehaviour
         Invoke("LoadInterstitial", (float)retryDelay);
     }
 
-    private void OnInterstitialDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+    private void OnInterstitialDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) 
+    {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("inter_shown");
+    }
 
     private void OnInterstitialAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("inter_fail");
         // Interstitial ad failed to display. AppLovin recommends that you load the next ad.
         LoadInterstitial();
     }
@@ -104,6 +128,7 @@ public class AppLovinStart : MonoBehaviour
     {
         if (MaxSdk.IsInterstitialReady(interstitialAdUnitId) && remoteConfig.IsInterTimeIntervalPassed)
         {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("inter_start");
             MaxSdk.ShowInterstitial(interstitialAdUnitId);
             remoteConfig.StartInterstitialTimer();
         }
@@ -149,10 +174,14 @@ public class AppLovinStart : MonoBehaviour
         Invoke("LoadRewardedAd", (float)retryDelay);
     }
 
-    private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+    private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) 
+    {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Rew_shown");
+    }
 
     private void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Rew_failed");
         // Rewarded ad failed to display. AppLovin recommends that you load the next ad.
         LoadRewardedAd();
     }
@@ -173,5 +202,14 @@ public class AppLovinStart : MonoBehaviour
     private void OnRewardedAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         // Ad revenue paid. Use this callback to track user revenue.
+    }
+
+    private void ShowReward()
+    {
+        if (MaxSdk.IsRewardedAdReady(rewardAdUnitId))
+        {
+            MaxSdk.ShowRewardedAd(rewardAdUnitId);
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("Rew_start");
+        }
     }
 }

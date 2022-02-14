@@ -26,6 +26,7 @@ public class SceneControllerForGoal : MonoBehaviour
 
     void Start()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("level_start", "level_number", SceneManager.GetActiveScene().buildIndex);
         pauseCanvas.SetActive(false);
         Messenger.AddListener(GameEvent.ENEMY_HIT, OnEnemyHit);
         Messenger.AddListener(GameEvent.BIRD_FLEW_AWAY, TakeLifeAway);
@@ -39,7 +40,7 @@ public class SceneControllerForGoal : MonoBehaviour
                 scoreLabel.text = "Goal: " + _score.ToString();
             }
         }
-        MaxSdk.ShowBanner("06df718d586aee81");
+        Messenger.Broadcast(GameEvent.SHOW_BANNER);
     }
 
     private void OnDestroy()
@@ -58,6 +59,7 @@ public class SceneControllerForGoal : MonoBehaviour
     {
         if (_score == 0 && !winFlag)
         {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("level_complete", "level_number", SceneManager.GetActiveScene().buildIndex);
             Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
             winCanvas.SetActive(true);
             Messenger.Broadcast(GameEvent.STOP_SPAWN);
@@ -77,11 +79,7 @@ public class SceneControllerForGoal : MonoBehaviour
 
     public void LoadThisScene()
     {
-        MaxSdk.HideBanner("06df718d586aee81");
-        if (MaxSdk.IsRewardedAdReady("c6348a13bd76eeff"))
-        {
-            MaxSdk.ShowRewardedAd("c6348a13bd76eeff");
-        }
+        Messenger.Broadcast(GameEvent.SHOW_REWARD);
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -105,6 +103,7 @@ public class SceneControllerForGoal : MonoBehaviour
 
     public void GameOver()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("level_fail", "level_number", SceneManager.GetActiveScene().buildIndex);
         Messenger.Broadcast(GameEvent.SHOW_INTERSTITIAL);
         defeatFlag = true;
         defeatCanvas.SetActive(true);
@@ -127,7 +126,7 @@ public class SceneControllerForGoal : MonoBehaviour
 
     public void LoadMenu()
     {
-        MaxSdk.HideBanner("06df718d586aee81");
+        Messenger.Broadcast(GameEvent.HIDE_BANNER);
         Messenger.Broadcast(GameEvent.WOOD_BUTTON_PUSH);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;

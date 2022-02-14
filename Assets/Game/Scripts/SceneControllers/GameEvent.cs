@@ -5,5 +5,8 @@
 	public const string STOP_SPAWN = "STOP_SPAWN";
 	public const string DEFEAT = "DEFEAT";
 	public const string WOOD_BUTTON_PUSH = "WOOD_BUTTON_PUSH";
+	public const string SHOW_REWARD = "SHOW_REWARD";
 	public const string SHOW_INTERSTITIAL = "SHOW_INTERSTITIAL";
+	public const string SHOW_BANNER = "SHOW_BANNER";
+	public const string HIDE_BANNER = "HIDE_BANNER";
 }

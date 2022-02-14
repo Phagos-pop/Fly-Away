@@ -7,7 +7,7 @@ public class FirebaseStart : MonoBehaviour
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(Task =>
         {
             Firebase.Analytics.FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-        });
-        
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("game_start");
+        });        
     }
 }
