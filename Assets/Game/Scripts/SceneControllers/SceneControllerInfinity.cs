@@ -46,7 +46,7 @@ public class SceneControllerInfinity : MonoBehaviour
                 continue;
             }
         }
-        Messenger.Broadcast(GameEvent.SHOW_BANNER);
+        //Messenger.Broadcast(GameEvent.SHOW_BANNER);
     }
     private void OnEnemyHit()
     {

@@ -9,6 +9,8 @@ public class SwipeLevels : MonoBehaviour , IBeginDragHandler , IDragHandler
 {
     [SerializeField]
     private GameObject[] levels;
+    [SerializeField]
+    private GameObject NoLevelsPanel;
     private int numLevels;
     private int numOfPages;
     private int currentPage;
@@ -20,14 +22,24 @@ public class SwipeLevels : MonoBehaviour , IBeginDragHandler , IDragHandler
         {
             for (int j = 0; j < levels[i].transform.childCount; j++)
             {
-                GameObject button = levels[i].transform.GetChild(j).gameObject as GameObject;
+                GameObject button = levels[i].transform.GetChild(j).gameObject;
                 button.name = ($"Levels {numLevels}");
-                button.GetComponent<Button>().onClick.AddListener(() => { 
-                    MainMenu.LoadLevel(Convert.ToInt32(button.transform.GetChild(0).gameObject.GetComponent<Text>().text)); 
-                }
+                if (numLevels < 31)
+                {
+                    button.GetComponent<Button>().onClick.AddListener(() => {
+                        MainMenu.LoadLevel(Convert.ToInt32(button.transform.GetChild(0).gameObject.GetComponent<Text>().text));
+                    }
                 );
+                }
                 button.transform.GetChild(0).gameObject.GetComponent<Text>().text = $"{numLevels}";
                 numLevels++;
+                if (numLevels > 31)
+                {
+                    button.GetComponent<Button>().onClick.AddListener(() => {
+                        NoLevelsPanel.SetActive(true);
+                    }
+                    );
+                }
             }
         }
         currentPage = 1;
